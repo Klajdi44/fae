@@ -17,7 +17,11 @@ function App(): JSX.Element {
         <Nav />
         {loadingState === 'loading' && <LoaderComponent />}
 
-        {data?.length === 0 ? <LoaderComponent /> : <Card data={data} />}
+        {data === null ? (
+          <LoaderComponent />
+        ) : (
+          data !== null && <Card data={data?.meals} />
+        )}
       </header>
     </div>
   );

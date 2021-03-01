@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react';
 
+type Meals = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal?: number;
+};
+type Data = {
+  meals: Meals[];
+};
+
 export default function fetchData(url: string) {
   const [error, setError] = useState<null | string>(null);
-  const [data, setData] = useState<null | { meals: {}[] }[] | []>([]);
+  const [data, setData] = useState<null | Data>(null);
   const [loadingState, setLoadingState] = useState<
     'idle' | 'loading' | 'loaded' | null
   >('idle');
@@ -17,10 +26,10 @@ export default function fetchData(url: string) {
         setLoadingState('loading');
         return response.json();
       })
-      .then(data => {
+      .then(apiData => {
         setError(null);
         setLoadingState('loaded');
-        setData(data);
+        setData(apiData);
       })
       .catch(err => {
         setData(null);

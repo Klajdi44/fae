@@ -1,8 +1,14 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
 
+type Meals = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal?: number;
+};
+
 type Props = {
-  data: {}[];
+  data: Meals[];
 };
 export default function Card(props: Props): JSX.Element {
   useEffect(() => {
@@ -23,16 +29,14 @@ export default function Card(props: Props): JSX.Element {
 
   return (
     <section className='card-wrapper'>
-      {props.data.meals.map(
-        (meal: { strMeal: string; strMealThumb: string; idMeal?: number }) => {
-          return (
-            <article className='card' key={meal.strMeal}>
-              <img src={meal.strMealThumb} alt='dish' />
-              <h3>{meal.strMeal}</h3>
-            </article>
-          );
-        }
-      )}
+      {props.data.map(meal => {
+        return (
+          <article className='card' key={meal.strMeal}>
+            <img src={meal.strMealThumb} alt='dish' />
+            <h3>{meal.strMeal}</h3>
+          </article>
+        );
+      })}
     </section>
   );
 }

@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
 
-function Burger() {
+function Burger(): JSX.Element {
   useEffect(() => {
     const tl = gsap.timeline();
     tl.to('#top-bun', {
       y: -95,
       rotate: 5,
-      duration: 0.5,
+      duration: 1,
       delay: 2,
       ease: 'power2',
     });
     tl.to('#top-bun', {
       y: -50,
       rotate: 5,
-      duration: 2,
+      duration: 5,
       yoyo: true,
       repeat: -1,
       ease: 'sine',
@@ -23,7 +23,7 @@ function Burger() {
     tl.to('#bottom-bun', {
       y: 28,
       rotate: 5,
-      duration: 3,
+      duration: 5,
       yoyo: true,
       repeat: -1,
     });
