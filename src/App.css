@@ -55,6 +55,7 @@ h1 {
 .card-wrapper {
   display: flex;
   flex-wrap: wrap;
+  --webkit-gap: 2em;
   gap: 2em;
   place-content: center;
   margin-bottom: 2em;
