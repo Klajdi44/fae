@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Button, SearchInput } from 'evergreen-ui';
-import Burger from './Burger';
+import Burger from '../burger/Burger';
 import gsap from 'gsap';
 
-export default function Nav(): JSX.Element {
+export default function Header(): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.header-wrapper',

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
-import './App.css';
-import fetchData from './modules/fetchData';
-import Card from './Components/Card';
-import Nav from './Components/Nav';
-import LoaderComponent from './Components/LoaderComponent';
+import './App.scss';
+import fetchData from '../../modules/fetchData';
+import Card from '../card/Card';
+import Header from '../header/Header';
+import LoaderComponent from '../loader/LoaderComponent';
 
 function App(): JSX.Element {
   const { data, error, loadingState } = fetchData(
@@ -14,7 +14,7 @@ function App(): JSX.Element {
   return (
     <div className='App'>
       <header className='App-header'>
-        <Nav />
+        <Header />
         {loadingState === 'loading' && <LoaderComponent />}
 
         {data === null ? (
