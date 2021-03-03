@@ -35,8 +35,8 @@
     color: var(--secondary-h-color);
   }
 
-  img {
-    width: 300px;
+  svg {
+    max-width: 100%;
   }
 }
 
@@ -51,6 +51,14 @@
 
     input {
       width: 240px;
+    }
+  }
+}
+
+@media screen and (min-width: 765px) {
+  .header-wrapper {
+    svg {
+      max-width: 50%;
     }
   }
 }

@@ -1,9 +1,7 @@
 .card-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  --webkit-gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2em;
-  place-content: center;
   margin-bottom: 2em;
   z-index: 2;
 }
@@ -18,6 +16,7 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+  margin: 0 auto;
 
   &:hover {
     transform: scale(1.1);
