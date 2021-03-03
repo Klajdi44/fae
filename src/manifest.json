@@ -1,0 +1,29 @@
+{
+  "name": "FaeFood",
+  "short_name": "Fae",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "../src/assets/manifesIMG/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+
+    {
+      "src": "../src/assets/manifesIMG/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+
+    {
+      "src": "../src/assets/manifesIMG/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
