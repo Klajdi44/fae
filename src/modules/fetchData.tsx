@@ -36,7 +36,7 @@ export default function fetchData(url: string) {
         setLoadingState(null);
         setError(err.message);
       });
-    return () => console.log('returned');
+    return () => console.log('aborted');
   }, []);
   return {
     data,
