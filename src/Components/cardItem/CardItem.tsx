@@ -75,6 +75,12 @@ function CardItem(props: any): JSX.Element {
   let filteredIgredients = [];
   const meal: any = data && data?.meals[0];
 
+  console.log(meal);
+
+  const instructions = meal?.strInstructions.split('\n');
+  const video = meal?.strYoutube;
+  const videoLink = video && video.substring(video.indexOf('=') + 1);
+
   //loop through the igredients and the measures and return them together
   if (meal) {
     for (let i = 1; i <= 20; i++) {
@@ -88,8 +94,9 @@ function CardItem(props: any): JSX.Element {
     filteredIgredients = ingredients.filter(
       el => el !== 'null null' && el != ' '
     );
-    console.log(filteredIgredients);
+    // console.log(filteredIgredients);
   }
+
   return (
     <>
       {loadingState === 'idle' && <Loader />}
@@ -119,10 +126,29 @@ function CardItem(props: any): JSX.Element {
                 <span>{meal.strArea}</span>
               </div>
 
-               <div className='tags'>
+              <div className='tags'>
                 {meal?.strTags?.split(',').map((el: string | null) => (
-                  <span>#{el}</span>
+                  <span key={el}>#{el}</span>
                 ))}
+              </div>
+
+              <div className='instructions '>
+                <h1>Instructions</h1>
+
+                {instructions.map((el: string) => (
+                  <p>{el}</p>
+                ))}
+              </div>
+
+              <div className='video-section'>
+                <iframe
+                  // width='400'
+                  height='315'
+                  src={`https://www.youtube.com/embed/${videoLink}`}
+                  frameBorder='0'
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </article>

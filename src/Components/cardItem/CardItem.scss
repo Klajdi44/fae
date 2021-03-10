@@ -25,6 +25,7 @@
   .card-item {
     background: #fff;
     min-height: 100vh;
+    height: 100vh;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     position: absolute;
@@ -50,7 +51,7 @@
       }
 
       h1 {
-        font-size: 1.5em;
+        font-size: 1.6em;
         margin-top: 8em;
       }
     }
@@ -78,6 +79,47 @@
         background: #68655dd5;
         padding: 10px 25px;
         // margin: 0 1.4em;
+      }
+    }
+
+    .instructions {
+      h1 {
+        font-size: 1.4em;
+      }
+      p {
+        line-height: 155%;
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    .video-section {
+      iframe {
+        width: 260px;
+        margin: 1em auto;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 375px) {
+  .card-item-wrapper {
+    .card-item {
+      .video-section {
+        iframe {
+          width: 310px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  .card-item-wrapper {
+    .card-item {
+      .video-section {
+        iframe {
+          width: 345px;
+        }
       }
     }
   }
