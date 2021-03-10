@@ -9,7 +9,7 @@ function Burger(): JSX.Element {
       rotate: 5,
       duration: 1,
       delay: 2,
-      ease: 'power2',
+      ease: 'easeIn',
     });
     tl.to('#top-bun', {
       y: -50,
@@ -20,20 +20,30 @@ function Burger(): JSX.Element {
       ease: 'sine',
     });
 
-    tl.to('#bottom-bun', {
-      y: 28,
-      rotate: 5,
-      duration: 5,
-      yoyo: true,
-      repeat: -1,
-    });
-    tl.to('#veggies', {
-      x: 28,
-      rotate: 5,
-      duration: 3,
-      yoyo: true,
-      repeat: -1,
-    });
+    tl.to(
+      '#bottom-bun',
+      {
+        y: 28,
+        rotate: 5,
+        duration: 5,
+        yoyo: true,
+        repeat: -1,
+        ease: 'easeIn',
+      },
+      '-=4.5'
+    );
+    tl.to(
+      '#veggies',
+      {
+        x: 28,
+        rotate: 5,
+        duration: 3,
+        yoyo: true,
+        repeat: -1,
+        ease: 'easeIn',
+      },
+      '-=4'
+    );
   }, []);
 
   return (

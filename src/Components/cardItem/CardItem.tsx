@@ -71,31 +71,40 @@ function CardItem(props: any): JSX.Element {
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
   );
 
-  const ingredients = [];
-  let filteredIgredients = [];
+  const ingredients: string[] = [];
+  let filteredIgredients: string[] = [];
   const meal: any = data && data?.meals[0];
-
-  console.log(meal);
-
   const instructions = meal?.strInstructions.split('\n');
-  const video = meal?.strYoutube;
-  const videoLink = video && video.substring(video.indexOf('=') + 1);
+  const videoId = meal?.strYoutube;
+  const videoLink = videoId && videoId.substring(videoId.indexOf('=') + 1);
+  const tags = meal?.strTags?.split(',');
+  const category = meal?.strCategory;
+  const filteredTags = tags?.filter((tag: string) => !tag.includes(category));
+  // console.log(meal);
 
   //loop through the igredients and the measures and return them together
   if (meal) {
     for (let i = 1; i <= 20; i++) {
-      let singleIngredient =
-        meal[`strMeasure${i}`] + ' ' + meal[`strIngredient${i}`];
+      let singleIngredient = `${meal[`strMeasure${i}`]}  ${
+        meal[`strIngredient${i}`] && meal[`strIngredient${i}`].toLowerCase()
+      }`;
       ingredients.push(singleIngredient);
     }
   }
 
   if (ingredients.length > 0) {
-    filteredIgredients = ingredients.filter(
-      el => el !== 'null null' && el != ' '
-    );
+    filteredIgredients = ingredients
+      .flat()
+      .filter(
+        el =>
+          el !== 'null null' &&
+          el !== 'null  null' &&
+          el != '  ' &&
+          el !== '   '
+      );
     // console.log(filteredIgredients);
   }
+  console.log(filteredIgredients);
 
   return (
     <>
@@ -127,28 +136,42 @@ function CardItem(props: any): JSX.Element {
               </div>
 
               <div className='tags'>
-                {meal?.strTags?.split(',').map((el: string | null) => (
-                  <span key={el}>#{el}</span>
-                ))}
+                {tags &&
+                  filteredTags.map((el: string | null) => (
+                    <span key={el}>#{el}</span>
+                  ))}
               </div>
 
               <div className='instructions '>
                 <h1>Instructions</h1>
 
                 {instructions.map((el: string) => (
-                  <p>{el}</p>
+                  <p key={Math.random()}>{el}</p>
                 ))}
               </div>
 
               <div className='video-section'>
-                <iframe
-                  // width='400'
-                  height='315'
-                  src={`https://www.youtube.com/embed/${videoLink}`}
-                  frameBorder='0'
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                  allowFullScreen
-                ></iframe>
+                {videoId && (
+                  <iframe
+                    // width='400'
+                    height='315'
+                    src={`https://www.youtube.com/embed/${videoLink}`}
+                    frameBorder='0'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    allowFullScreen
+                  ></iframe>
+                )}
+              </div>
+
+              <div className='ingredients-section'>
+                <h1>Ingredients</h1>
+                <ul>
+                  {filteredIgredients.map(ingredient => (
+                    <li key={ingredient}>{ingredient}</li>
+                  ))}
+                </ul>
+                <br />
+                <br />
               </div>
             </div>
           </article>
