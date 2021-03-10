@@ -70,6 +70,7 @@ function CardItem(props: any): JSX.Element {
   const { data, loadingState, error } = fetchData(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
   );
+  const [favorites, setFavorites] = useState<boolean>(false);
 
   const ingredients: string[] = [];
   let filteredIgredients: string[] = [];
@@ -121,6 +122,11 @@ function CardItem(props: any): JSX.Element {
             <Link to='/'>
               <i className='fas fa-chevron-left'></i>
             </Link>
+
+            <i
+              onClick={() => setFavorites(!favorites)}
+              className={favorites ? 'fas fa-heart' : 'far fa-heart'}
+            ></i>
           </article>
 
           <article className='card-item'>

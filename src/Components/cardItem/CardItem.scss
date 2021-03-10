@@ -8,15 +8,29 @@
     background: #d6aa39;
     text-align: start;
     position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 
     a {
       color: #525067;
+
+      &:active {
+        outline: none;
+      }
     }
 
     .fa-chevron-left {
-      margin: 1em 0 0 1em;
+      margin: 1.4em 0 0 0em;
       background: #fff;
       padding: 0.5em 0.7em;
+      font-size: 1.5em;
+      border-radius: 50%;
+    }
+    .fa-heart {
+      margin: 1.4em 0 0 5em;
+      background: #fff;
+      padding: 0.5em 0.6em;
       font-size: 1.5em;
       border-radius: 50%;
     }
