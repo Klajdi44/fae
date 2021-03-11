@@ -157,7 +157,7 @@ function CardItem(props: any): JSX.Element {
                     filteredMeasures.map((measure, i) => {
                       return (
                         <>
-                          <li key={measure}>
+                          <li key={measure + Math.random()}>
                             {measure} {filteredIgredients[i]}
                           </li>
                           <img
@@ -187,8 +187,8 @@ function CardItem(props: any): JSX.Element {
                   )}
                 </div>
 
-                {instructions.map((el: string) => (
-                  <p key={Math.random()}>{el}</p>
+                {instructions.map((paragraph: string) => (
+                  <p key={paragraph + Math.random()}>{paragraph}</p>
                 ))}
                 <br />
                 <br />
