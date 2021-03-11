@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import fetchData from '../../modules/fetchData';
 import Loader from '../loader/LoaderComponent';
 
@@ -66,6 +66,7 @@ function CardItem(props: any): JSX.Element {
   // .replace(/\n/g, '')
 
   const { id } = useParams();
+  const history = useHistory();
 
   const { data, loadingState, error } = fetchData(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
@@ -119,9 +120,10 @@ function CardItem(props: any): JSX.Element {
       {data && (
         <section className='card-item-wrapper'>
           <article className='back-button-wrapper'>
-            <Link to='/'>
-              <i className='fas fa-chevron-left'></i>
-            </Link>
+            <i
+              onClick={() => history.go(-1)}
+              className='fas fa-chevron-left'
+            ></i>
 
             <i
               onClick={() => setFavorites(!favorites)}
