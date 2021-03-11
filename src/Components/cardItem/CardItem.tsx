@@ -148,27 +148,6 @@ function CardItem(props: any): JSX.Element {
                   ))}
               </div>
 
-              <div className='instructions '>
-                <h1>Instructions</h1>
-
-                {instructions.map((el: string) => (
-                  <p key={Math.random()}>{el}</p>
-                ))}
-              </div>
-
-              <div className='video-section'>
-                {videoId && (
-                  <iframe
-                    // width='400'
-                    height='315'
-                    src={`https://www.youtube.com/embed/${videoLink}`}
-                    frameBorder='0'
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                    allowFullScreen
-                  ></iframe>
-                )}
-              </div>
-
               <div className='ingredients-section'>
                 <h1>Ingredients</h1>
                 <ul>
@@ -176,6 +155,26 @@ function CardItem(props: any): JSX.Element {
                     <li key={ingredient}>{ingredient}</li>
                   ))}
                 </ul>
+              </div>
+
+              <div className='instructions '>
+                <h1>Instructions</h1>
+                <div className='video-section'>
+                  {videoId && (
+                    <iframe
+                      // width='400'
+                      height='315'
+                      src={`https://www.youtube.com/embed/${videoLink}`}
+                      frameBorder='0'
+                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                      allowFullScreen
+                    ></iframe>
+                  )}
+                </div>
+
+                {instructions.map((el: string) => (
+                  <p key={Math.random()}>{el}</p>
+                ))}
                 <br />
                 <br />
               </div>
