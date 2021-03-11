@@ -15,13 +15,14 @@ export default function Card(props: Props): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.card',
-      { opacity: 0.1, x: 100 + '%' },
+      { opacity: 0, x: 100 + '%' },
       {
         opacity: 1,
         x: 0 + '%',
         duration: 1,
         ease: 'back.out(1.3)',
-        delay: 0.4,
+        stagger: 0.2,
+        delay: 0.3,
       }
     );
   }, []);
