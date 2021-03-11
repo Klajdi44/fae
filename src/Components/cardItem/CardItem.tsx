@@ -74,7 +74,9 @@ function CardItem(props: any): JSX.Element {
   const [favorites, setFavorites] = useState<boolean>(false);
 
   const ingredients: string[] = [];
+  const measures: string[] = [];
   let filteredIgredients: string[] = [];
+  let filteredMeasures: string[] = [];
   const meal: any = data && data?.meals[0];
   const instructions = meal?.strInstructions.split('\n');
   const videoId = meal?.strYoutube;
@@ -87,26 +89,24 @@ function CardItem(props: any): JSX.Element {
   //loop through the igredients and the measures and return them together
   if (meal) {
     for (let i = 1; i <= 20; i++) {
-      let singleIngredient = `${meal[`strMeasure${i}`]}  ${
+      let singleMeasure =
+        meal[`strMeasure${i}`] && `${meal[`strMeasure${i}`].trim()} `;
+      let singleIngredient = `${
         meal[`strIngredient${i}`] && meal[`strIngredient${i}`].toLowerCase()
       }`;
       ingredients.push(singleIngredient);
+      measures.push(singleMeasure);
     }
   }
 
-  if (ingredients.length > 0) {
-    filteredIgredients = ingredients
-      .flat()
-      .filter(
-        el =>
-          el !== 'null null' &&
-          el !== 'null  null' &&
-          el != '  ' &&
-          el !== '   '
-      );
-    // console.log(filteredIgredients);
+  if (ingredients.length > 0 && measures.length > 0) {
+    filteredIgredients = ingredients.filter(
+      el => el !== 'null null' && el?.length > 0
+    );
+    filteredMeasures = measures.filter(
+      el => el !== 'null null' && el?.length > 0 && el != ' '
+    );
   }
-  console.log(filteredIgredients);
 
   return (
     <>
@@ -153,9 +153,22 @@ function CardItem(props: any): JSX.Element {
               <div className='ingredients-section'>
                 <h1>Ingredients</h1>
                 <ul>
-                  {filteredIgredients.map(ingredient => (
-                    <li key={ingredient}>{ingredient}</li>
-                  ))}
+                  {filteredMeasures.length &&
+                    filteredMeasures.map((measure, i) => {
+                      return (
+                        <>
+                          <li key={measure}>
+                            {measure} {filteredIgredients[i]}
+                          </li>
+                          <img
+                            loading='lazy'
+                            key={measure + Math.random()}
+                            src={`https://www.themealdb.com/images/ingredients/${filteredIgredients[i]}-Small.png`}
+                            alt='Ingredients'
+                          />
+                        </>
+                      );
+                    })}
                 </ul>
               </div>
 

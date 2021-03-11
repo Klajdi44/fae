@@ -99,6 +99,7 @@
     }
 
     .instructions {
+      margin-top: 2em;
       h1 {
         font-size: 1.4em;
       }
@@ -116,11 +117,13 @@
     }
 
     .ingredients-section {
+      margin-top: 3em;
       h1 {
         font-size: 1.4em;
       }
       li {
         line-height: 150%;
+        margin: 0.5em 0;
       }
     }
   }
