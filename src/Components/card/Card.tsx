@@ -21,8 +21,8 @@ export default function Card(props: Props): JSX.Element {
         x: 0 + '%',
         duration: 1,
         ease: 'back.out(1.3)',
-        stagger: 0.2,
-        delay: 0.3,
+        stagger: 0.1,
+        delay: 0.2,
       }
     );
   }, []);
