@@ -53,6 +53,10 @@
 @media screen and (min-width: 375px) {
   .card {
     width: calc(210px + 20vmin);
+    img {
+      height: 243px;
+      width: 243px;
+    }
   }
 }
 
