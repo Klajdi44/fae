@@ -15,7 +15,7 @@ export default function Card(props: Props): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.card',
-      { opacity: 0, x: 100 + '%' },
+      { opacity: 0, x: -100 + '%' },
       {
         opacity: 1,
         x: 0 + '%',
