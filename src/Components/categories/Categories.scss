@@ -5,6 +5,7 @@
     color: rgb(158, 158, 158);
     font-weight: 600;
     margin-left: 2em;
+    font-size: 0.9em;
   }
 
   .categories-card-wrapper {
@@ -21,6 +22,7 @@
     .categories-card {
       min-width: 200px;
       min-height: 150px;
+      height: 160px;
       padding: 1em 0.3em 0 0.3em;
       margin-left: 0.5em;
       border-radius: 20px;
@@ -30,6 +32,7 @@
       align-items: center;
       scroll-snap-align: center;
       background: rgba(211, 211, 211, 0.259);
+      animation: appear 1s ease-in-out;
 
       .category-Img {
         max-width: 75%;
@@ -42,5 +45,14 @@
     .selected {
       background: #d6a939;
     }
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

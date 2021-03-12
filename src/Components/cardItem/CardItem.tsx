@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import fetchData from '../../modules/fetchData';
 import Loader from '../loader/LoaderComponent';
+import gsap from 'gsap';
 
 function CardItem(props: any): JSX.Element {
   // type RootObject = {
@@ -108,95 +109,111 @@ function CardItem(props: any): JSX.Element {
     );
   }
 
+  useEffect(() => {
+    gsap.fromTo(
+      '.card-item-wrapper',
+      { opacity: 0, y: 100 + '%' },
+      {
+        opacity: 1,
+        y: 0 + '%',
+        duration: 1.4,
+        ease: 'back.out(1.3)',
+        delay: 0.3,
+      }
+    );
+  }, []);
+
   return (
     <>
-      {loadingState === 'idle' && <Loader />}
+      {loadingState === 'loading' && <Loader />}
       {error && (
         <div style={{ color: '#000' }}>
           {' '}
           Sorry, we couldn't find the dish. Please try again
         </div>
       )}
-      {data && (
-        <section className='card-item-wrapper'>
-          <article className='back-button-wrapper'>
-            <i
-              onClick={() => history.go(-1)}
-              className='fas fa-chevron-left'
-            ></i>
+      <section className='card-item-wrapper'>
+        {data && (
+          <>
+            {' '}
+            <article className='back-button-wrapper'>
+              <i
+                onClick={() => history.go(-1)}
+                className='fas fa-chevron-left'
+              ></i>
 
-            <i
-              onClick={() => setFavorites(!favorites)}
-              className={favorites ? 'fas fa-heart' : 'far fa-heart'}
-            ></i>
-          </article>
-
-          <article className='card-item'>
-            <div className='wrapper-fix'>
-              <div className='img-section'>
-                <img src={meal.strMealThumb} alt='dish' />
-                <h1>{meal.strMeal}</h1>
-              </div>
-
-              <div className='category-area'>
-                <span>{meal.strCategory}</span>
-                <span>{meal.strArea}</span>
-              </div>
-
-              <div className='tags'>
-                {tags &&
-                  filteredTags.map((el: string | null) => (
-                    <span key={el}>#{el}</span>
-                  ))}
-              </div>
-
-              <div className='ingredients-section'>
-                <h1>Ingredients</h1>
-                <ul>
-                  {filteredMeasures.length &&
-                    filteredMeasures.map((measure, i) => {
-                      return (
-                        <>
-                          <li key={measure + Math.random()}>
-                            {measure} {filteredIgredients[i]}
-                          </li>
-                          <img
-                            loading='lazy'
-                            key={measure + Math.random()}
-                            src={`https://www.themealdb.com/images/ingredients/${filteredIgredients[i]}-Small.png`}
-                            alt='Ingredients'
-                          />
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-
-              <div className='instructions '>
-                <h1>Instructions</h1>
-                <div className='video-section'>
-                  {videoId && (
-                    <iframe
-                      // width='400'
-                      height='315'
-                      src={`https://www.youtube.com/embed/${videoLink}`}
-                      frameBorder='0'
-                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                      allowFullScreen
-                    ></iframe>
-                  )}
+              <i
+                onClick={() => setFavorites(!favorites)}
+                className={favorites ? 'fas fa-heart' : 'far fa-heart'}
+              ></i>
+            </article>
+            <article className='card-item'>
+              <div className='wrapper-fix'>
+                <div className='img-section'>
+                  <img src={meal.strMealThumb} alt='dish' />
+                  <h1>{meal.strMeal}</h1>
                 </div>
 
-                {instructions.map((paragraph: string) => (
-                  <p key={paragraph + Math.random()}>{paragraph}</p>
-                ))}
-                <br />
-                <br />
+                <div className='category-area'>
+                  <span>{meal.strCategory}</span>
+                  <span>{meal.strArea}</span>
+                </div>
+
+                <div className='tags'>
+                  {tags &&
+                    filteredTags.map((el: string | null) => (
+                      <span key={el ?? Math.random()}>#{el}</span>
+                    ))}
+                </div>
+
+                <div className='ingredients-section'>
+                  <h1>Ingredients</h1>
+                  <ul>
+                    {filteredMeasures.length &&
+                      filteredMeasures.map((measure, i) => {
+                        return (
+                          <>
+                            <li key={measure + Math.random()}>
+                              {measure} {filteredIgredients[i]}
+                            </li>
+                            <img
+                              loading='lazy'
+                              key={measure + Math.random()}
+                              src={`https://www.themealdb.com/images/ingredients/${filteredIgredients[i]}-Small.png`}
+                              alt='Ingredients'
+                            />
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+
+                <div className='instructions '>
+                  <h1>Instructions</h1>
+                  <div className='video-section'>
+                    {videoId && (
+                      <iframe
+                        // width='400'
+                        height='315'
+                        src={`https://www.youtube.com/embed/${videoLink}`}
+                        frameBorder='0'
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                        allowFullScreen
+                      ></iframe>
+                    )}
+                  </div>
+
+                  {instructions.map((paragraph: string) => (
+                    <p key={paragraph + Math.random()}>{paragraph}</p>
+                  ))}
+                  <br />
+                  <br />
+                </div>
               </div>
-            </div>
-          </article>
-        </section>
-      )}
+            </article>{' '}
+          </>
+        )}
+      </section>
     </>
   );
 }

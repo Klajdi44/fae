@@ -22,11 +22,10 @@ function App(): JSX.Element {
             <Route exact path='/'>
               <Header />
               <Categories category={category} setCategory={setCategory} />
-
               {data === null ? (
                 <LoaderComponent />
               ) : (
-                data !== null && <Card data={data?.meals} />
+                data !== null && <Card category={category} data={data?.meals} />
               )}
             </Route>
             <Route path='/CardItem/:id'>

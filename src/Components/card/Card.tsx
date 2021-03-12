@@ -10,6 +10,7 @@ type Meals = {
 
 type Props = {
   data: Meals[];
+  category: string;
 };
 export default function Card(props: Props): JSX.Element {
   useEffect(() => {
@@ -19,13 +20,12 @@ export default function Card(props: Props): JSX.Element {
       {
         opacity: 1,
         x: 0 + '%',
-        duration: 1,
+        duration: 0.7,
         ease: 'back.out(1.3)',
-        stagger: 0.04,
-        delay: 0.1,
+        stagger: 0.03,
       }
     );
-  }, []);
+  }, [props.data]);
 
   return (
     <section className='card-wrapper'>
