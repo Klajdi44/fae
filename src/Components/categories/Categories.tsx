@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CategoriesCard from '../categoriesCard/CategoriesCard';
 import fetchData from '../../modules/fetchData';
+import gsap from 'gsap';
 
 type Props = {
   category: string;
@@ -22,7 +23,20 @@ function Categories(props: Props): JSX.Element {
   const { data: categoryData, loadingState, error } = fetchData(
     ' https://www.themealdb.com/api/json/v1/1/categories.php'
   );
-  console.log(props.category);
+  useEffect(() => {
+    gsap.fromTo(
+      '.categories-card',
+      { opacity: 0, x: -100 + '%' },
+      {
+        opacity: 1,
+        x: 0 + '%',
+        duration: 1,
+        ease: 'back.out(1.3)',
+        stagger: 0.4,
+        delay: 1,
+      }
+    );
+  }, []);
 
   return (
     <section className='categories-wrapper'>
