@@ -7,11 +7,12 @@ import Header from '../header/Header';
 import LoaderComponent from '../loader/LoaderComponent';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CardItem from '../cardItem/CardItem';
+import Categories from '../categories/Categories';
 
 function App(): JSX.Element {
-  const { data, error, loadingState } = fetchData(
-    ' https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood'
-  );
+  const [category, setCategory] = useState<string>('Beef');
+  const { data, error, loadingState } = fetchData(`
+     https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
   console.log(data);
   return (
     <Router>
@@ -20,7 +21,7 @@ function App(): JSX.Element {
           <Switch>
             <Route exact path='/'>
               <Header />
-              {loadingState === 'loading' && <LoaderComponent />}
+              <Categories category={category} setCategory={setCategory} />
 
               {data === null ? (
                 <LoaderComponent />

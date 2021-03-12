@@ -5,13 +5,13 @@ type Meals = {
   strMealThumb: string;
   idMeal?: number;
 };
-type Data = {
-  meals: Meals[];
-};
+// type Data = {
+//   meals: Meals[];
+// };
 
 export default function fetchData(url: string) {
   const [error, setError] = useState<null | string>(null);
-  const [data, setData] = useState<null | Data>(null);
+  const [data, setData] = useState<null | any>(null); //:Data
   const [loadingState, setLoadingState] = useState<
     'idle' | 'loading' | 'loaded' | null
   >('idle');
@@ -37,7 +37,7 @@ export default function fetchData(url: string) {
         setError(err.message);
       });
     return () => console.log('aborted');
-  }, []);
+  }, [url]);
   return {
     data,
     error,
