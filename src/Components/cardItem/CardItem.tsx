@@ -172,17 +172,17 @@ function CardItem(props: any): JSX.Element {
                     {filteredMeasures.length &&
                       filteredMeasures.map((measure, i) => {
                         return (
-                          <>
+                          <div key={Math.random()}>
                             <li key={measure + Math.random()}>
                               {measure} {filteredIgredients[i]}
                             </li>
                             <img
                               loading='lazy'
-                              key={measure + Math.random()}
+                              key={Math.random()}
                               src={`https://www.themealdb.com/images/ingredients/${filteredIgredients[i]}-Small.png`}
                               alt='Ingredients'
                             />
-                          </>
+                          </div>
                         );
                       })}
                   </ul>

@@ -17,7 +17,9 @@ export default function fetchData(url: string) {
   >('idle');
 
   useEffect(() => {
-    fetch(url)
+    // abort controller
+    const abortCont = new AbortController();
+    fetch(url, { signal: abortCont.signal })
       .then(response => {
         if (!response.ok) {
           setLoadingState(null);
@@ -32,11 +34,15 @@ export default function fetchData(url: string) {
         setData(apiData);
       })
       .catch(err => {
-        setData(null);
-        setLoadingState(null);
-        setError(err.message);
+        if (err.name === 'AbortError') {
+          console.log('fetch aborted');
+        } else {
+          setData(null);
+          setLoadingState(null);
+          setError(err.message);
+        }
       });
-    return () => console.log('aborted');
+    return () => abortCont.abort();
   }, [url]);
   return {
     data,
