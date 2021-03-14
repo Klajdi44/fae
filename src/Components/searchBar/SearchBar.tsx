@@ -1,14 +1,14 @@
 import React from 'react';
-import { Button, SearchInput } from 'evergreen-ui';
+import { SearchInput } from 'evergreen-ui';
 
 type Props = {
-  buttonTxt: string;
-  inputValue: string;
+  inputValue: any;
+  onInput: any;
   placeHolder: string;
   onSumbit: (e: React.FormEvent) => void;
 };
 function SearchbyName(props: Props) {
-  const { buttonTxt, inputValue, placeHolder, onSumbit } = props;
+  const { inputValue, placeHolder, onSumbit, onInput } = props;
   return (
     <form onSubmit={onSumbit} className='input-wrapper'>
       <SearchInput
@@ -16,10 +16,8 @@ function SearchbyName(props: Props) {
         marginBottom={20}
         marginTop={20}
         placeholder={placeHolder}
+        onInput={onInput}
       />
-      <Button marginRight={16} appearance='minimal' intent='success'>
-        {buttonTxt}
-      </Button>
     </form>
   );
 }
