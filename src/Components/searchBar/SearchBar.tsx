@@ -1,10 +1,15 @@
 import React from 'react';
-import { SearchInput } from 'evergreen-ui';
+import { SearchInput, Button } from 'evergreen-ui';
+import { Link } from 'react-router-dom';
 
 type Props = {
   inputValue: any;
   onInput: any;
   placeHolder: string;
+  buttonTxt?: string;
+  appearance?: any;
+  intent?: any;
+  linkTo?: any;
   onSumbit: (e: React.FormEvent) => void;
 };
 function SearchbyName(props: Props) {
@@ -18,6 +23,14 @@ function SearchbyName(props: Props) {
         placeholder={placeHolder}
         onInput={onInput}
       />
+      {props.buttonTxt && (
+        <Link to={props.linkTo}>
+          <Button intent={props?.intent} appearance={props.appearance}>
+            {' '}
+            {props.buttonTxt}
+          </Button>
+        </Link>
+      )}
     </form>
   );
 }
