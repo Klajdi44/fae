@@ -1,0 +1,21 @@
+.search-byName-wrapper {
+  color: #525067;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 87%;
+  margin: 1.3em auto 3em auto;
+  background: #d6aa39;
+  border-radius: 15px;
+  h3 {
+    margin-right: 1em;
+  }
+}
+a {
+  text-decoration: none;
+}
+
+.or {
+  color: #525067;
+  font-size: 1.5em;
+}

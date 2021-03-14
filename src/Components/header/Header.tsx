@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Button, SearchInput } from 'evergreen-ui';
 import Burger from '../burger/Burger';
 import gsap from 'gsap';
 
@@ -18,16 +17,6 @@ export default function Header(): JSX.Element {
   }, []);
   return (
     <>
-      <form className='input-wrapper'>
-        <SearchInput
-          marginBottom={20}
-          marginTop={20}
-          placeholder='Search your fav food'
-        />
-        <Button marginRight={16} appearance='minimal' intent='success'>
-          Search
-        </Button>
-      </form>
       <div className='header-wrapper'>
         <h1>Discover Cook Eat Repeat</h1>
         {/* <img className='burger' src={Burger} alt='burger' /> */}

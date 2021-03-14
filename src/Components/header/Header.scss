@@ -1,31 +1,3 @@
-// input
-.input-wrapper {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  input {
-    width: 200px;
-  }
-
-  input:focus {
-    border: 2px solid rgb(214, 170, 57);
-    box-shadow: none;
-  }
-
-  button {
-    color: rgb(214, 170, 57);
-    font-size: 1em;
-    // border: 1px solid var(--header-color);
-
-    &:hover {
-      background: var(--header-color) !important;
-    }
-  }
-}
 
 .header-wrapper {
   margin-bottom: 3em;

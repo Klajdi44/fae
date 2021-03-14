@@ -8,6 +8,8 @@ import LoaderComponent from '../loader/LoaderComponent';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CardItem from '../cardItem/CardItem';
 import Categories from '../categories/Categories';
+import SearchByName from '../searchByName/SearchByName';
+import SearchMeal from '../searchMeal/SearchMeal';
 
 function App(): JSX.Element {
   const [category, setCategory] = useState<string>('Beef');
@@ -22,6 +24,8 @@ function App(): JSX.Element {
             <Route exact path='/'>
               <Header />
               <Categories category={category} setCategory={setCategory} />
+              <small className='or'>or</small>
+              <SearchByName />
               {data === null ? (
                 <LoaderComponent />
               ) : (
@@ -30,6 +34,9 @@ function App(): JSX.Element {
             </Route>
             <Route path='/CardItem/:id'>
               <CardItem />
+            </Route>
+            <Route path='/SearchMeal'>
+              <SearchMeal />
             </Route>
           </Switch>
         </header>

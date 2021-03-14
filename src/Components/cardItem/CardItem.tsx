@@ -4,73 +4,71 @@ import fetchData from '../../modules/fetchData';
 import Loader from '../loader/LoaderComponent';
 import gsap from 'gsap';
 
+type Meal = {
+  idMeal: string | null;
+  strMeal: string | null;
+  strDrinkAlternate?: any;
+  strCategory: string | null;
+  strArea: string | null;
+  strInstructions: string | null;
+  strMealThumb: string | null;
+  strTags: string | null;
+  strYoutube: string | null;
+  strIngredient1?: string | null;
+  strIngredient2?: string | null;
+  strIngredient3?: string | null;
+  strIngredient4?: string | null;
+  strIngredient5?: string | null;
+  strIngredient6?: string | null;
+  strIngredient7?: string | null;
+  strIngredient8?: string | null;
+  strIngredient9?: string | null;
+  strIngredient10?: string | null;
+  strIngredient11?: string | null;
+  strIngredient12?: string | null;
+  strIngredient13?: string | null;
+  strIngredient14?: string | null;
+  strIngredient15?: string | null;
+  strIngredient16?: any;
+  strIngredient17?: any;
+  strIngredient18?: any;
+  strIngredient19?: any;
+  strIngredient20?: any;
+  strMeasure1: string | null;
+  strMeasure2: string | null;
+  strMeasure3: string | null;
+  strMeasure4: string | null;
+  strMeasure5: string | null;
+  strMeasure6: string | null;
+  strMeasure7: string | null;
+  strMeasure8: string | null;
+  strMeasure9: string | null;
+  strMeasure10: string | null;
+  strMeasure11: string | null;
+  strMeasure12: string | null;
+  strMeasure13: string | null;
+  strMeasure14: string | null;
+  strMeasure15: string | null;
+  strMeasure16?: any;
+  strMeasure17?: any;
+  strMeasure18?: any;
+  strMeasure19?: any;
+  strMeasure20?: any;
+  strSource?: any;
+  strImageSource?: any;
+  strCreativeCommonsConfirmed?: any;
+  dateModified?: any;
+};
 function CardItem(props: any): JSX.Element {
   // type RootObject = {
   //   meals: Meal[];
   // };
 
-  type Meal = {
-    idMeal: string | null;
-    strMeal: string | null;
-    strDrinkAlternate?: any;
-    strCategory: string | null;
-    strArea: string | null;
-    strInstructions: string | null;
-    strMealThumb: string | null;
-    strTags: string | null;
-    strYoutube: string | null;
-    strIngredient1?: string | null;
-    strIngredient2?: string | null;
-    strIngredient3?: string | null;
-    strIngredient4?: string | null;
-    strIngredient5?: string | null;
-    strIngredient6?: string | null;
-    strIngredient7?: string | null;
-    strIngredient8?: string | null;
-    strIngredient9?: string | null;
-    strIngredient10?: string | null;
-    strIngredient11?: string | null;
-    strIngredient12?: string | null;
-    strIngredient13?: string | null;
-    strIngredient14?: string | null;
-    strIngredient15?: string | null;
-    strIngredient16?: any;
-    strIngredient17?: any;
-    strIngredient18?: any;
-    strIngredient19?: any;
-    strIngredient20?: any;
-    strMeasure1: string | null;
-    strMeasure2: string | null;
-    strMeasure3: string | null;
-    strMeasure4: string | null;
-    strMeasure5: string | null;
-    strMeasure6: string | null;
-    strMeasure7: string | null;
-    strMeasure8: string | null;
-    strMeasure9: string | null;
-    strMeasure10: string | null;
-    strMeasure11: string | null;
-    strMeasure12: string | null;
-    strMeasure13: string | null;
-    strMeasure14: string | null;
-    strMeasure15: string | null;
-    strMeasure16?: any;
-    strMeasure17?: any;
-    strMeasure18?: any;
-    strMeasure19?: any;
-    strMeasure20?: any;
-    strSource?: any;
-    strImageSource?: any;
-    strCreativeCommonsConfirmed?: any;
-    dateModified?: any;
-  };
-  // .replace(/\n/g, '')
-
   const { id } = useParams();
   const history = useHistory();
 
   const { data, loadingState, error } = fetchData(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    props.url || `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
   );
   const [favorites, setFavorites] = useState<boolean>(false);
 
@@ -78,7 +76,10 @@ function CardItem(props: any): JSX.Element {
   const measures: string[] = [];
   let filteredIgredients: string[] = [];
   let filteredMeasures: string[] = [];
-  const meal: any = data && data?.meals[0];
+  let meal: any | any[];
+  if (data && data.meals) {
+    meal = data?.meals[0];
+  }
   const instructions = meal?.strInstructions.split('\n');
   const videoId = meal?.strYoutube;
   const videoLink = videoId && videoId.substring(videoId.indexOf('=') + 1);
@@ -112,15 +113,19 @@ function CardItem(props: any): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.card-item-wrapper',
-      { opacity: 0, y: 100 + '%' },
+      { opacity: 0, x: 100 + '%' },
       {
         opacity: 1,
-        y: 0 + '%',
+        x: 0 + '%',
         duration: 1.4,
         ease: 'back.out(1.3)',
         delay: 0.3,
       }
     );
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }, []);
 
   return (
@@ -132,13 +137,15 @@ function CardItem(props: any): JSX.Element {
           Sorry, we couldn't find the dish. Please try again
         </div>
       )}
+
       <section className='card-item-wrapper'>
-        {data && (
+        {data && data?.meals != null && data.meals[0] != null && (
           <>
-            {' '}
             <article className='back-button-wrapper'>
               <i
-                onClick={() => history.go(-1)}
+                onClick={() => {
+                  !props.inputValue ? history.go(-1) : history.push('/');
+                }}
                 className='fas fa-chevron-left'
               ></i>
 
@@ -150,7 +157,7 @@ function CardItem(props: any): JSX.Element {
             <article className='card-item'>
               <div className='wrapper-fix'>
                 <div className='img-section'>
-                  <img src={meal.strMealThumb} alt='dish' />
+                  <img src={meal?.strMealThumb} alt='dish' />
                   <h1>{meal.strMeal}</h1>
                 </div>
 
@@ -206,12 +213,22 @@ function CardItem(props: any): JSX.Element {
                   {instructions.map((paragraph: string) => (
                     <p key={paragraph + Math.random()}>{paragraph}</p>
                   ))}
+
                   <br />
                   <br />
                 </div>
               </div>
-            </article>{' '}
+            </article>
           </>
+        )}
+        {props.inputValue && props.inputValue !== null ? (
+          <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
+            Meal not found!{' '}
+          </div>
+        ) : (
+          <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
+            Search the food you love{' '}
+          </div>
         )}
       </section>
     </>
