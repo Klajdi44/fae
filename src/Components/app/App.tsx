@@ -15,7 +15,9 @@ function App(): JSX.Element {
   const [category, setCategory] = useState<string>('Beef');
   const { data, error, loadingState } = fetchData(`
      https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-  console.log(data);
+
+  const [inputValue, setInputValue] = useState<any>('');
+
   return (
     <Router>
       <div className='App'>
@@ -36,7 +38,10 @@ function App(): JSX.Element {
               <CardItem />
             </Route>
             <Route path='/SearchMeal'>
-              <SearchMeal />
+              <SearchMeal
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+              />
             </Route>
           </Switch>
         </header>

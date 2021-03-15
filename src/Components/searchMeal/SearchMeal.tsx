@@ -4,14 +4,17 @@ import fetchData from '../../modules/fetchData';
 import Card from '../card/Card';
 import Loader from '../loader/LoaderComponent';
 
-function SearchMeal() {
-  const [inputValue, setInputValue] = useState<any>('');
+type Props = {
+  inputValue: string;
+  setInputValue: React.Dispatch<any>;
+};
+function SearchMeal(props: Props) {
   const { data, loadingState, error } = fetchData(
-    ` https://www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`
+    ` https://www.themealdb.com/api/json/v1/1/search.php?s=${props.inputValue}`
   );
 
-  if (inputValue?.length === 0) {
-    setInputValue(null);
+  if (props.inputValue?.length === 0) {
+    props.setInputValue(null);
   }
 
   type Meals = {
@@ -41,14 +44,14 @@ function SearchMeal() {
       <div>
         <SearchBar
           placeHolder='Search your fav food'
-          inputValue={inputValue}
+          inputValue={props.inputValue}
           intent='danger'
           linkTo='/'
           appearance='minimal'
           buttonTxt='Cancel'
           onSumbit={(e: React.FormEvent<Element>) => onsubmit(e)}
           onInput={(e: { target: { value: React.SetStateAction<string> } }) =>
-            setInputValue(e.target.value)
+            props.setInputValue(e.target.value)
           }
         />
       </div>
@@ -56,9 +59,9 @@ function SearchMeal() {
       {loadingState === 'loading' && <Loader />}
       {mealObj.meals.length &&
         mealObj.meals.map(meal => (
-          <Card animation={false} data={mealObj?.meals} />
+          <Card key={Math.random()} animation={false} data={mealObj?.meals} />
         ))}
-      {inputValue === null ? (
+      {props.inputValue === null ? (
         <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
           Search the food you love{' '}
         </div>
