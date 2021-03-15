@@ -143,9 +143,7 @@ function CardItem(props: any): JSX.Element {
           <>
             <article className='back-button-wrapper'>
               <i
-                onClick={() => {
-                  !props.inputValue ? history.go(-1) : history.push('/');
-                }}
+                onClick={() => history.go(-1)}
                 className='fas fa-chevron-left'
               ></i>
 
@@ -220,15 +218,6 @@ function CardItem(props: any): JSX.Element {
               </div>
             </article>
           </>
-        )}
-        {props.inputValue && props.inputValue !== null ? (
-          <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
-            Meal not found!{' '}
-          </div>
-        ) : (
-          <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
-            Search the food you love{' '}
-          </div>
         )}
       </section>
     </>

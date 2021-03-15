@@ -10,21 +10,23 @@ type Meals = {
 
 type Props = {
   data: Meals[];
-  category: string;
+  category?: string;
+  animation?: boolean;
 };
 export default function Card(props: Props): JSX.Element {
   useEffect(() => {
-    gsap.fromTo(
-      '.card',
-      { opacity: 0, x: -100 + '%' },
-      {
-        opacity: 1,
-        x: 0 + '%',
-        duration: 0.7,
-        ease: 'back.out(1.3)',
-        stagger: 0.03,
-      }
-    );
+    props.animation &&
+      gsap.fromTo(
+        '.card',
+        { opacity: 0, x: -100 + '%' },
+        {
+          opacity: 1,
+          x: 0 + '%',
+          duration: 0.7,
+          ease: 'back.out(1.3)',
+          stagger: 0.03,
+        }
+      );
   }, [props.data]);
 
   return (
