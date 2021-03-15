@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from '../searchBar/SearchBar';
 import fetchData from '../../modules/fetchData';
 import Card from '../card/Card';
@@ -38,9 +38,16 @@ function SearchMeal(props: Props) {
       });
     });
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   function onsubmit(e: React.FormEvent<Element>) {}
   return (
-    <div>
+    <div className='search-meal'>
       <div>
         <SearchBar
           placeHolder='Search your fav food'

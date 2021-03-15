@@ -113,19 +113,15 @@ function CardItem(props: any): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.card-item-wrapper',
-      { opacity: 0, x: 100 + '%' },
+      { opacity: 0, y: 20 + '%' },
       {
         opacity: 1,
-        x: 0 + '%',
-        duration: 1.4,
+        y: 0 + '%',
+        duration: 1,
         ease: 'back.out(1.3)',
         delay: 0.3,
       }
     );
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
   }, []);
 
   return (

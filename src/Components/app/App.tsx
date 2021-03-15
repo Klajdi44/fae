@@ -31,7 +31,7 @@ function App(): JSX.Element {
               {data === null ? (
                 <LoaderComponent />
               ) : (
-                <Card category={category} data={data?.meals} />
+                <Card animation={true} category={category} data={data?.meals} />
               )}
             </Route>
             <Route path='/CardItem/:id'>
