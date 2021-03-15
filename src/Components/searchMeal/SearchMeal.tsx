@@ -47,8 +47,8 @@ function SearchMeal(props: Props) {
 
   function onsubmit(e: React.FormEvent<Element>) {}
   return (
-    <div className='search-meal'>
-      <div>
+    <section className='search-meal'>
+      <article>
         <SearchBar
           placeHolder='Search your fav food'
           inputValue={props.inputValue}
@@ -61,25 +61,31 @@ function SearchMeal(props: Props) {
             props.setInputValue(e.target.value)
           }
         />
-      </div>
+      </article>
       {error && <div>Something went wrong, Pleas try again </div>}
       {loadingState === 'loading' && <Loader />}
-      {mealObj.meals.length &&
-        mealObj.meals.map(meal => (
-          <Card key={Math.random()} animation={false} data={mealObj?.meals} />
-        ))}
+      <article>
+        {mealObj.meals.length &&
+          mealObj.meals.map(meal => (
+            <Card key={Math.random()} animation={false} data={mealObj?.meals} />
+          ))}
+      </article>
       {props.inputValue === null ? (
-        <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
+        <article
+          style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}
+        >
           Search the food you love{' '}
-        </div>
+        </article>
       ) : mealObj.meals.length > 0 ? (
         ''
       ) : (
-        <div style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}>
+        <article
+          style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}
+        >
           Meal not found!{' '}
-        </div>
+        </article>
       )}
-    </div>
+    </section>
   );
 }
 
