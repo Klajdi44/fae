@@ -33,8 +33,8 @@ export default function Card(props: Props): JSX.Element {
     <section className='card-wrapper'>
       {props.data.map(meal => {
         return (
-          <Link to={`/CardItem/${meal.idMeal}`} key={meal.strMeal}>
-            <article className='card'>
+          <Link key={meal.strMeal} to={`/CardItem/${meal.idMeal}`}>
+            <article key={meal.idMeal} className='card'>
               <img
                 loading='lazy'
                 src={meal.strMealThumb}

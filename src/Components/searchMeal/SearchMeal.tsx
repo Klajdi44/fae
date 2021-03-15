@@ -23,21 +23,6 @@ function SearchMeal(props: Props) {
     strMeal: string;
   };
 
-  const mealObj: {
-    meals: Meals[];
-  } = {
-    meals: [],
-  };
-
-  data?.meals !== null &&
-    data?.meals.map((meal: Meals) => {
-      return mealObj.meals.push({
-        idMeal: meal.idMeal,
-        strMealThumb: meal.strMealThumb,
-        strMeal: meal.strMeal,
-      });
-    });
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -65,10 +50,7 @@ function SearchMeal(props: Props) {
       {error && <div>Something went wrong, Pleas try again </div>}
       {loadingState === 'loading' && <Loader />}
       <article>
-        {mealObj.meals.length &&
-          mealObj.meals.map(meal => (
-            <Card key={Math.random()} animation={false} data={mealObj?.meals} />
-          ))}
+        {data?.meals?.length && <Card animation={false} data={data.meals} />}
       </article>
       {props.inputValue === null ? (
         <article
@@ -76,7 +58,7 @@ function SearchMeal(props: Props) {
         >
           Search the food you love{' '}
         </article>
-      ) : mealObj.meals.length > 0 ? (
+      ) : data?.meals?.length > 0 ? (
         ''
       ) : (
         <article
