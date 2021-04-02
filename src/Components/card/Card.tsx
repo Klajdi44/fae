@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 
-type Meals = {
+export type Meals = {
   strMeal: string;
   strMealThumb: string;
   idMeal?: number;
 };
 
 type Props = {
-  data: Meals[];
+  data: Meals;
   category?: string;
   animation?: boolean;
+  className?: string;
 };
 export default function Card(props: Props): JSX.Element {
   useEffect(() => {
@@ -30,23 +31,21 @@ export default function Card(props: Props): JSX.Element {
   }, [props.data]);
 
   return (
-    <section className='card-wrapper'>
-      {props.data.map(meal => {
-        return (
-          <Link key={meal.strMeal} to={`/CardItem/${meal.idMeal}`}>
-            <article key={meal.idMeal} className='card'>
-              <img
-                loading='lazy'
-                src={meal.strMealThumb}
-                alt='dish'
-                width='200'
-                height='200'
-              />
-              <h3>{meal.strMeal}</h3>
-            </article>
-          </Link>
-        );
-      })}
-    </section>
+    <article className={props.className}>
+      return (
+      <Link key={props.data.strMeal} to={`/CardItem/${props.data.idMeal}`}>
+        <article key={props.data.idMeal} className='card'>
+          <img
+            loading='lazy'
+            src={props.data.strMealThumb}
+            alt='dish'
+            width='200'
+            height='200'
+          />
+          <h3>{props.data.strMeal}</h3>
+        </article>
+      </Link>
+      ))
+    </article>
   );
 }

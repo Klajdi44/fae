@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../searchBar/SearchBar';
 import fetchData from '../../modules/fetchData';
-import Card from '../card/Card';
+import Card, { Meals } from '../card/Card';
 import Loader from '../loader/LoaderComponent';
 
 type Props = {
@@ -50,7 +50,20 @@ function SearchMeal(props: Props) {
       {error && <div>Something went wrong, Pleas try again </div>}
       {loadingState === 'loading' && <Loader />}
       <article>
-        {data?.meals?.length && <Card animation={false} data={data.meals} />}
+        {/* {data?.meals?.length && <Card animation={false} data={data.meals} />} */}
+        <section className={'card-wrapper'}>
+          {data?.meals?.length &&
+            data.meals.map((meal: Meals, i: number) => {
+              return (
+                <Card
+                  key={i}
+                  animation={false}
+                  data={meal}
+                  className={'search-card-wrapper'}
+                />
+              );
+            })}
+        </section>
       </article>
       {props.inputValue === null ? (
         <article

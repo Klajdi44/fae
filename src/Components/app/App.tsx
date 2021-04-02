@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import fetchData from '../../modules/fetchData';
-import Card from '../card/Card';
+import Card, { Meals } from '../card/Card';
 import Header from '../header/Header';
 import LoaderComponent from '../loader/LoaderComponent';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -17,6 +17,7 @@ function App(): JSX.Element {
      https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
 
   const [inputValue, setInputValue] = useState<any>('');
+  console.log(data);
 
   return (
     <Router>
@@ -31,7 +32,19 @@ function App(): JSX.Element {
               {data === null ? (
                 <LoaderComponent />
               ) : (
-                <Card animation={true} category={category} data={data?.meals} />
+                <section className={'card-wrapper'}>
+                  {data &&
+                    data?.meals.map((meal: Meals, i: number) => {
+                      return (
+                        <Card
+                          key={i}
+                          animation={true}
+                          category={category}
+                          data={meal}
+                        />
+                      );
+                    })}
+                </section>
               )}
             </Route>
             <Route path='/CardItem/:id'>
