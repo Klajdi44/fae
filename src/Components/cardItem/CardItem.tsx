@@ -4,73 +4,15 @@ import fetchData from '../../modules/fetchData';
 import Loader from '../loader/LoaderComponent';
 import gsap from 'gsap';
 
-type Meal = {
-  idMeal: string | null;
-  strMeal: string | null;
-  strDrinkAlternate?: any;
-  strCategory: string | null;
-  strArea: string | null;
-  strInstructions: string | null;
-  strMealThumb: string | null;
-  strTags: string | null;
-  strYoutube: string | null;
-  strIngredient1?: string | null;
-  strIngredient2?: string | null;
-  strIngredient3?: string | null;
-  strIngredient4?: string | null;
-  strIngredient5?: string | null;
-  strIngredient6?: string | null;
-  strIngredient7?: string | null;
-  strIngredient8?: string | null;
-  strIngredient9?: string | null;
-  strIngredient10?: string | null;
-  strIngredient11?: string | null;
-  strIngredient12?: string | null;
-  strIngredient13?: string | null;
-  strIngredient14?: string | null;
-  strIngredient15?: string | null;
-  strIngredient16?: any;
-  strIngredient17?: any;
-  strIngredient18?: any;
-  strIngredient19?: any;
-  strIngredient20?: any;
-  strMeasure1: string | null;
-  strMeasure2: string | null;
-  strMeasure3: string | null;
-  strMeasure4: string | null;
-  strMeasure5: string | null;
-  strMeasure6: string | null;
-  strMeasure7: string | null;
-  strMeasure8: string | null;
-  strMeasure9: string | null;
-  strMeasure10: string | null;
-  strMeasure11: string | null;
-  strMeasure12: string | null;
-  strMeasure13: string | null;
-  strMeasure14: string | null;
-  strMeasure15: string | null;
-  strMeasure16?: any;
-  strMeasure17?: any;
-  strMeasure18?: any;
-  strMeasure19?: any;
-  strMeasure20?: any;
-  strSource?: any;
-  strImageSource?: any;
-  strCreativeCommonsConfirmed?: any;
-  dateModified?: any;
-};
-function CardItem(props: any): JSX.Element {
-  // type RootObject = {
-  //   meals: Meal[];
-  // };
-
+function CardItem(): JSX.Element {
   const { id } = useParams();
   const history = useHistory();
 
   const { data, loadingState, error } = fetchData(
-    props.url || `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
   );
   const [favorites, setFavorites] = useState<boolean>(false);
+  const [favoritesDB, setFavoritesDB] = useState<any>([]);
 
   const ingredients: string[] = [];
   const measures: string[] = [];
@@ -86,7 +28,8 @@ function CardItem(props: any): JSX.Element {
   const tags = meal?.strTags?.split(',');
   const category = meal?.strCategory;
   const filteredTags = tags?.filter((tag: string) => !tag.includes(category));
-  // console.log(meal);
+  const url = 'https://test2020-96ed.restdb.io/rest/dishes';
+  const key = '5f96f6ee4b77c1637d147e2d';
 
   //loop through the igredients and the measures and return them together
   if (meal) {
@@ -136,7 +79,67 @@ function CardItem(props: any): JSX.Element {
         }
       );
     }
+    fetch(url, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'x-apikey': key,
+        'cache-control': 'no-cache',
+      },
+    })
+      .then(res => res.json())
+      .then(data => setFavoritesDB(data));
   }, []);
+  console.log(favoritesDB);
+
+  useEffect(() => {
+    favoritesDB.length &&
+      favoritesDB.forEach(food => {
+        if (meal?.idMeal === food?.idMeal) {
+          setFavorites(true);
+          console.log('they match');
+        }
+      });
+  }, [favoritesDB]);
+
+  function handleClick() {
+    setFavorites(!favorites);
+
+    if (favorites === false) {
+      const favoritesData = {
+        strMeal: meal.strMeal,
+        strMealThumb: meal.strMealThumb,
+        idMeal: meal.idMeal,
+      };
+      const postData = JSON.stringify(favoritesData);
+      fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'x-apikey': key,
+          'cache-control': 'no-cache',
+        },
+        body: postData,
+      })
+        .then(res => res.json())
+        .then(() => console.log('completed'));
+    }
+
+    if (favorites === true) {
+      const findID = favoritesDB.find(el => el.strMeal === meal.strMeal);
+
+      fetch(`${url}/${findID._id}`, {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'x-apikey': key,
+          'cache-control': 'no-cache',
+        },
+      })
+        .then(res => res.json())
+        .then(() => console.log('deleted'));
+    }
+  }
 
   return (
     <>
@@ -158,7 +161,7 @@ function CardItem(props: any): JSX.Element {
               ></i>
 
               <i
-                onClick={() => setFavorites(!favorites)}
+                onClick={handleClick}
                 className={favorites ? 'fas fa-heart' : 'far fa-heart'}
               ></i>
             </article>

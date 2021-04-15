@@ -5,10 +5,6 @@ type Meals = {
   strMealThumb: string;
   idMeal?: number;
 };
-// type Data = {
-//   meals: Meals[];
-// };
-
 export default function fetchData(url: string) {
   const [error, setError] = useState<null | string>(null);
   const [data, setData] = useState<null | any>(null); //:Data

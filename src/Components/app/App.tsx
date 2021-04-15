@@ -10,6 +10,7 @@ import CardItem from '../cardItem/CardItem';
 import Categories from '../categories/Categories';
 import SearchByName from '../searchByName/SearchByName';
 import SearchMeal from '../searchMeal/SearchMeal';
+import BottomMenu from '../BottomMenu/BottomMenu';
 
 function App(): JSX.Element {
   const [category, setCategory] = useState<string>('Beef');
@@ -29,6 +30,7 @@ function App(): JSX.Element {
               <Categories category={category} setCategory={setCategory} />
               <small className='or'>or</small>
               <SearchByName />
+
               {data === null ? (
                 <LoaderComponent />
               ) : (
@@ -57,6 +59,7 @@ function App(): JSX.Element {
               />
             </Route>
           </Switch>
+          <BottomMenu />
         </header>
       </div>
     </Router>
