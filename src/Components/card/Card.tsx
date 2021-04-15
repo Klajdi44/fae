@@ -32,7 +32,6 @@ export default function Card(props: Props): JSX.Element {
 
   return (
     <article className={props.className}>
-      return (
       <Link key={props.data.strMeal} to={`/CardItem/${props.data.idMeal}`}>
         <article key={props.data.idMeal} className='card'>
           <img
@@ -45,7 +44,6 @@ export default function Card(props: Props): JSX.Element {
           <h3>{props.data.strMeal}</h3>
         </article>
       </Link>
-      ))
     </article>
   );
 }

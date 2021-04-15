@@ -11,6 +11,7 @@ import Categories from '../categories/Categories';
 import SearchByName from '../searchByName/SearchByName';
 import SearchMeal from '../searchMeal/SearchMeal';
 import BottomMenu from '../BottomMenu/BottomMenu';
+import Favorites from '../Favorites/Favorites';
 
 function App(): JSX.Element {
   const [category, setCategory] = useState<string>('Beef');
@@ -18,7 +19,6 @@ function App(): JSX.Element {
      https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
 
   const [inputValue, setInputValue] = useState<any>('');
-  console.log(data);
 
   return (
     <Router>
@@ -57,6 +57,9 @@ function App(): JSX.Element {
                 inputValue={inputValue}
                 setInputValue={setInputValue}
               />
+            </Route>
+            <Route path='/Favorites'>
+              <Favorites />
             </Route>
           </Switch>
           <BottomMenu />

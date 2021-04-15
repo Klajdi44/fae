@@ -4,6 +4,12 @@ import fetchData from '../../modules/fetchData';
 import Loader from '../loader/LoaderComponent';
 import gsap from 'gsap';
 
+type MealObj = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+};
+
 function CardItem(): JSX.Element {
   const { id } = useParams();
   const history = useHistory();
@@ -30,6 +36,7 @@ function CardItem(): JSX.Element {
   const filteredTags = tags?.filter((tag: string) => !tag.includes(category));
   const url = 'https://test2020-96ed.restdb.io/rest/dishes';
   const key = '5f96f6ee4b77c1637d147e2d';
+  const localStorageArray: [] | MealObj[] = [];
 
   //loop through the igredients and the measures and return them together
   if (meal) {
@@ -79,65 +86,45 @@ function CardItem(): JSX.Element {
         }
       );
     }
-    fetch(url, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'x-apikey': key,
-        'cache-control': 'no-cache',
-      },
-    })
-      .then(res => res.json())
-      .then(data => setFavoritesDB(data));
+
+    if (!localStorage.getItem('favorites')) {
+      localStorage.setItem('favorites', JSON.stringify(localStorageArray));
+    }
   }, []);
-  console.log(favoritesDB);
 
   useEffect(() => {
-    favoritesDB.length &&
-      favoritesDB.forEach(food => {
-        if (meal?.idMeal === food?.idMeal) {
+    const favoritesArr = JSON.parse(localStorage.getItem('favorites'));
+
+    meal &&
+      favoritesArr.map((el: MealObj) => {
+        if (el.idMeal === meal?.idMeal) {
           setFavorites(true);
-          console.log('they match');
         }
       });
-  }, [favoritesDB]);
+  }, [meal]);
 
   function handleClick() {
     setFavorites(!favorites);
 
+    const favoritesStorage = JSON.parse(localStorage.getItem('favorites'));
+    //if favorites === false when clicked then add it, but if it is true when clicked then remove it
     if (favorites === false) {
-      const favoritesData = {
+      const ojb = {
         strMeal: meal.strMeal,
-        strMealThumb: meal.strMealThumb,
         idMeal: meal.idMeal,
+        strMealThumb: meal.strMealThumb,
       };
-      const postData = JSON.stringify(favoritesData);
-      fetch(url, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'x-apikey': key,
-          'cache-control': 'no-cache',
-        },
-        body: postData,
-      })
-        .then(res => res.json())
-        .then(() => console.log('completed'));
+      favoritesStorage.push(ojb);
+      localStorage.setItem('favorites', JSON.stringify(favoritesStorage));
     }
 
     if (favorites === true) {
-      const findID = favoritesDB.find(el => el.strMeal === meal.strMeal);
-
-      fetch(`${url}/${findID._id}`, {
-        method: 'delete',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'x-apikey': key,
-          'cache-control': 'no-cache',
-        },
-      })
-        .then(res => res.json())
-        .then(() => console.log('deleted'));
+      const findIndex = favoritesStorage.findIndex(
+        (el: MealObj) => el.idMeal === meal.idMeal
+      );
+      favoritesStorage.splice(findIndex, 1);
+      localStorage.setItem('favorites', JSON.stringify(favoritesStorage));
+      console.log(favoritesStorage);
     }
   }
 
