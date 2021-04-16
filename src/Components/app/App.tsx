@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.scss';
 import fetchData from '../../modules/fetchData';
 import Card, { Meals } from '../card/Card';
