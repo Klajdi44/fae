@@ -29,9 +29,11 @@ function Favorites() {
       <div className='favorites-content'>
         {localStorageArray !== null &&
           localStorageArray.length > 0 &&
-          localStorageArray.map((meal: Meals) => (
-            <Card key={meal.strMealThumb} animation data={meal} />
-          ))}
+          localStorageArray
+            .map((meal: Meals) => (
+              <Card key={meal.strMealThumb} animation data={meal} />
+            ))
+            .reverse()}
       </div>
     </div>
   );
