@@ -5,7 +5,7 @@ import gsap from 'gsap';
 type Props = {
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
-export default function Header(props): JSX.Element {
+export default function Header(props: Props): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.header-wrapper',

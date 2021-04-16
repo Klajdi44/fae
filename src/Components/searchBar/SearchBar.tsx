@@ -15,14 +15,16 @@ type Props = {
 function SearchbyName(props: Props) {
   const { inputValue, placeHolder, onSumbit, onInput } = props;
   return (
-    <form onSubmit={onSumbit} className='input-wrapper'>
-      <SearchInput
-        value={inputValue}
-        marginBottom={20}
-        marginTop={20}
-        placeholder={placeHolder}
-        onInput={onInput}
-      />
+    <div className='form-wrapper'>
+      <form onSubmit={onSumbit} className='input-wrapper'>
+        <SearchInput
+          value={inputValue}
+          marginBottom={20}
+          marginTop={20}
+          placeholder={placeHolder}
+          onInput={onInput}
+        />
+      </form>
       {props.buttonTxt && (
         <Link to={props.linkTo}>
           <Button intent={props?.intent} appearance={props.appearance}>
@@ -31,7 +33,7 @@ function SearchbyName(props: Props) {
           </Button>
         </Link>
       )}
-    </form>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-type Meals = {
+export type Meals = {
   strMeal: string;
   strMealThumb: string;
   idMeal?: number;

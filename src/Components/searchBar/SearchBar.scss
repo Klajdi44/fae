@@ -1,8 +1,5 @@
 // input
 .input-wrapper {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,4 +32,10 @@
       background: var(--header-color) !important;
     }
   }
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -30,7 +30,9 @@ function SearchMeal(props: Props) {
     });
   }, []);
 
-  function onsubmit(e: React.FormEvent<Element>) {}
+  function onsubmit(e: React.FormEvent<Element>) {
+    e.preventDefault();
+  }
   return (
     <section className='search-meal'>
       <article>
@@ -41,7 +43,7 @@ function SearchMeal(props: Props) {
           linkTo='/'
           appearance='minimal'
           buttonTxt='Cancel'
-          onSumbit={(e: React.FormEvent<Element>) => onsubmit(e)}
+          onSumbit={onsubmit}
           onInput={(e: { target: { value: React.SetStateAction<string> } }) =>
             props.setInputValue(e.target.value)
           }
@@ -67,7 +69,13 @@ function SearchMeal(props: Props) {
       </article>
       {props.inputValue === null ? (
         <article
-          style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}
+          className='small'
+          style={{
+            color: '#000',
+            textAlign: 'start',
+            marginLeft: '1.3em',
+            marginTop: '-7em',
+          }}
         >
           Search the food you love{' '}
         </article>
@@ -75,7 +83,13 @@ function SearchMeal(props: Props) {
         ''
       ) : (
         <article
-          style={{ color: '#000', textAlign: 'start', marginLeft: '2em' }}
+          className='small'
+          style={{
+            color: '#000',
+            textAlign: 'start',
+            marginLeft: '2em',
+            marginTop: '-7em',
+          }}
         >
           Meal not found!{' '}
         </article>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Card from '../card/Card';
+import { Meals } from '../../modules/fetchData';
 
 function Favorites() {
   useEffect(() => {
@@ -17,7 +18,7 @@ function Favorites() {
       </small>
       {localStorageArray === null ? (
         <small>No favorites found</small>
-      ) : localStorageArray !== null && localStorageArray.length <= 1 ? (
+      ) : localStorageArray !== null && localStorageArray.length < 1 ? (
         <small>No favorites found</small>
       ) : (
         ''
@@ -28,7 +29,7 @@ function Favorites() {
       <div className='favorites-content'>
         {localStorageArray !== null &&
           localStorageArray.length > 0 &&
-          localStorageArray.map(meal => (
+          localStorageArray.map((meal: Meals) => (
             <Card key={meal.strMealThumb} animation data={meal} />
           ))}
       </div>
