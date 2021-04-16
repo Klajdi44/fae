@@ -31,9 +31,9 @@ export default function Card(props: Props): JSX.Element {
   }, [props.data]);
 
   return (
-    <article className={props.className}>
-      <Link key={props.data.strMeal} to={`/CardItem/${props.data.idMeal}`}>
-        <article key={props.data.idMeal} className='card'>
+    <article key={props.data.idMeal} className={props.className}>
+      <Link to={`/CardItem/${props.data.idMeal}`}>
+        <article className='card'>
           <img
             loading='lazy'
             src={props.data.strMealThumb}

@@ -61,31 +61,31 @@ function CardItem(): JSX.Element {
   }
 
   useEffect(() => {
-    if (/webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
-      gsap.fromTo(
-        '.card-item-wrapper',
-        { opacity: 0, x: 100 + '%' },
-        {
-          opacity: 1,
-          x: 0 + '%',
-          duration: 1,
-          ease: 'back.out(1.3)',
-          delay: 0.3,
-        }
-      );
-    } else {
-      gsap.fromTo(
-        '.card-item-wrapper',
-        { opacity: 0, y: 20 + '%' },
-        {
-          opacity: 1,
-          y: 0 + '%',
-          duration: 1,
-          ease: 'back.out(1.3)',
-          delay: 0.3,
-        }
-      );
-    }
+    // if (/webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+    //   gsap.fromTo(
+    //     '.card-item-wrapper',
+    //     { opacity: 0, x: 100 + '%' },
+    //     {
+    //       opacity: 1,
+    //       x: 0 + '%',
+    //       duration: 1,
+    //       ease: 'back.out(1.3)',
+    //       delay: 0.3,
+    //     }
+    //   );
+    // } else {
+    gsap.fromTo(
+      '.card-item-wrapper',
+      { opacity: 0, y: 20 + '%' },
+      {
+        opacity: 1,
+        y: 0 + '%',
+        duration: 1,
+        ease: 'back.out(1.3)',
+        delay: 0.3,
+      }
+    );
+    // }
 
     if (!localStorage.getItem('favorites')) {
       localStorage.setItem('favorites', JSON.stringify(localStorageArray));

@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import Burger from '../burger/Burger';
 import gsap from 'gsap';
 
-export default function Header(): JSX.Element {
+type Props = {
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+};
+export default function Header(props): JSX.Element {
   useEffect(() => {
     gsap.fromTo(
       '.header-wrapper',
@@ -14,12 +17,12 @@ export default function Header(): JSX.Element {
         delay: 0.5,
       }
     );
+    props.setPage(1);
   }, []);
   return (
     <>
       <div className='header-wrapper'>
         <h1>Discover Cook Eat Repeat</h1>
-        {/* <img className='burger' src={Burger} alt='burger' /> */}
         <Burger />
       </div>
     </>

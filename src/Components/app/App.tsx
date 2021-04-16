@@ -17,8 +17,8 @@ function App(): JSX.Element {
   const [category, setCategory] = useState<string>('Beef');
   const { data, error, loadingState } = fetchData(`
      https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-
-  const [inputValue, setInputValue] = useState<any>('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [page, setPage] = useState(1);
 
   return (
     <Router>
@@ -26,15 +26,16 @@ function App(): JSX.Element {
         <header className='App-header'>
           <Switch>
             <Route exact path='/'>
-              <Header />
+              <Header setPage={setPage} />
               <Categories category={category} setCategory={setCategory} />
-              <small className='or'>or</small>
-              <SearchByName />
+              {/* <small className='or'>or</small>
+              <SearchByName /> */}
 
               {data === null ? (
                 <LoaderComponent />
               ) : (
                 <section className={'card-wrapper'}>
+                  <small> Recipies: {data && data?.meals.length}</small>
                   {data &&
                     data?.meals.map((meal: Meals, i: number) => {
                       return (
@@ -43,6 +44,7 @@ function App(): JSX.Element {
                           animation={true}
                           category={category}
                           data={meal}
+                          className='card-home-wrapper'
                         />
                       );
                     })}
@@ -62,7 +64,7 @@ function App(): JSX.Element {
               <Favorites />
             </Route>
           </Switch>
-          <BottomMenu />
+          <BottomMenu page={page} setPage={setPage} />
         </header>
       </div>
     </Router>
