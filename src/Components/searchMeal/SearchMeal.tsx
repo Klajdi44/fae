@@ -73,7 +73,7 @@ function SearchMeal(props: Props) {
           style={{
             color: '#000',
             textAlign: 'start',
-            marginLeft: '1.3em',
+            marginLeft: '2.7em',
             marginTop: '-7em',
           }}
         >
@@ -87,7 +87,7 @@ function SearchMeal(props: Props) {
           style={{
             color: '#000',
             textAlign: 'start',
-            marginLeft: '2em',
+            marginLeft: '2.6em',
             marginTop: '-7em',
           }}
         >
