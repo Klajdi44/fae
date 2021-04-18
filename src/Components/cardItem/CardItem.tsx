@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import fetchData from '../../modules/fetchData';
 import Loader from '../loader/LoaderComponent';
 import gsap from 'gsap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type MealObj = {
   strMeal: string;
@@ -109,6 +111,13 @@ function CardItem(): JSX.Element {
     const favoritesStorage = JSON.parse(localStorage.getItem('favorites'));
     //if favorites === false when clicked then add it, but if it is true when clicked then remove it
     if (favorites === false) {
+      toast.warn('✔ Added to favorites!', {
+        position: 'top-left',
+        autoClose: 2500,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       const ojb = {
         strMeal: meal.strMeal,
         idMeal: meal.idMeal,
@@ -119,6 +128,13 @@ function CardItem(): JSX.Element {
     }
 
     if (favorites === true) {
+      toast.error('Removed from favorites!', {
+        position: 'top-left',
+        autoClose: 2500,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
       const findIndex = favoritesStorage.findIndex(
         (el: MealObj) => el.idMeal === meal.idMeal
       );
@@ -153,6 +169,8 @@ function CardItem(): JSX.Element {
               ></i>
             </article>
             <article className='card-item'>
+              <ToastContainer />
+
               <div className='wrapper-fix'>
                 <div className='img-section'>
                   <img src={meal?.strMealThumb} alt='dish' />
@@ -170,7 +188,6 @@ function CardItem(): JSX.Element {
                       <span key={el ?? Math.random()}>#{el}</span>
                     ))}
                 </div>
-
                 <div className='ingredients-section'>
                   <h1>Ingredients</h1>
                   <ul>
