@@ -1,9 +1,10 @@
 .favorites {
+  padding: 3em 0;
   color: #000;
   h1 {
-    color: #525067;
+    color: var(--header-color);
     display: flex;
-    margin-top: 1em;
+    margin-top: 0;
     margin-left: 0.8em;
   }
 

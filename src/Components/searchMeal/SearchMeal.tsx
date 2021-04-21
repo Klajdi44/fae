@@ -41,7 +41,7 @@ function SearchMeal(props: Props) {
           inputValue={props.inputValue}
           intent='danger'
           linkTo='/'
-          appearance='minimal'
+          appearance='default'
           buttonTxt='Cancel'
           onSumbit={onsubmit}
           onInput={(e: { target: { value: React.SetStateAction<string> } }) =>
@@ -68,31 +68,11 @@ function SearchMeal(props: Props) {
         </section>
       </article>
       {props.inputValue === null ? (
-        <article
-          className='small'
-          style={{
-            color: '#000',
-            textAlign: 'start',
-            marginLeft: '2.7em',
-            marginTop: '-7em',
-          }}
-        >
-          Search the food you love{' '}
-        </article>
+        <article className='small'>Search the food you love </article>
       ) : data?.meals?.length > 0 ? (
         ''
       ) : (
-        <article
-          className='small'
-          style={{
-            color: '#000',
-            textAlign: 'start',
-            marginLeft: '2.6em',
-            marginTop: '-7em',
-          }}
-        >
-          Meal not found!{' '}
-        </article>
+        <article className='small'>Meal not found! </article>
       )}
     </section>
   );
