@@ -1,0 +1,28 @@
+.favorites {
+  color: #000;
+}
+
+.favorites h1 {
+  color: #525067;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 1em;
+  margin-left: 0.8em;
+}
+
+.favorites small {
+  color: #9e9e9e;
+  font-weight: 600;
+  margin-left: 2em;
+  font-size: 0.9em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.favorites .favorites-content {
+  padding: 1em 0 4.5em 0;
+}
+/*# sourceMappingURL=Favorites.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACX,UAAU,EAAE,KAAK;EACjB,MAAM,EAAE,IAAI;EACZ,QAAQ,EAAE,MAAM;EAChB,UAAU,EAAE,OAAO;CAKpB;;AATD,AAME,YANU,CAMV,aAAa,CAAC;EACZ,MAAM,EAAE,WAAW;CACpB",
+    "sources": [
+        "../../searchMeal/SearchMeal.scss"
+    ],
+    "names": [],
+    "file": "SearchMeal.css"
+}

@@ -1,5 +1,4 @@
 @use '../main.scss';
-
 .App {
   text-align: center;
   background: #fff;
@@ -7,10 +6,10 @@
   max-width: 1200px;
   margin: auto;
   background: var(--main-bg-color);
+  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
-// variables
 :root {
   --header-color: #525067;
   --secondary-h-color: rgb(214, 170, 57);
@@ -18,10 +17,6 @@
   --outside-card-color: #fff;
   --selected-color: #525067;
   --category-color: rgba(211, 211, 211, 0.259);
-  --paragraph-color: rgba(0, 0, 0, 0.7);
-  --card-item-color: #fff;
-  --card-item-heading-color: #525067;
-  --card-item-header-color: #d6aa39;
 }
 
 .dark {
@@ -30,11 +25,8 @@
   --outside-card-color: #2c2c2c;
   --selected-color: #383646;
   --category-color: #2c2c2c;
-  --paragraph-color: rgba(255, 255, 255, 0.7);
-  --card-item-heading-color: rgb(214, 170, 57);
-  --card-item-header-color: #d6aa39;
-  --card-item-color: #2c2c2c;
 }
+
 .App-header {
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
@@ -49,8 +41,6 @@
   padding-bottom: 5em;
 }
 
-// darkmode
-
 .darkMode-wrapper {
   background: #212121c4;
   height: 25px;
@@ -58,27 +48,33 @@
   border-radius: 20px;
   padding: 0.4em 0.43em;
   cursor: pointer;
-
-  .darkCircle {
-    height: 25px;
-    width: 30px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-  }
-
-  .dark-on {
-    transform: translateX(40px);
-    background: url('../../assets/moon.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .dark-off {
-    transform: translateX(0px);
-    background: url('../../assets/sun.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
 }
+
+.darkMode-wrapper .darkCircle {
+  height: 25px;
+  width: 30px;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.darkMode-wrapper .dark-on {
+  -webkit-transform: translateX(40px);
+          transform: translateX(40px);
+  background: url("../../assets/moon.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.darkMode-wrapper .dark-off {
+  -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+  background: url("../../assets/sun.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/*# sourceMappingURL=App.css.map */

@@ -1,0 +1,11 @@
+.search-meal {
+  min-height: 100vh;
+  height: auto;
+  overflow: hidden;
+  visibility: visible;
+}
+
+.search-meal .card-wrapper {
+  margin: 2em 0 7em 0;
+}
+/*# sourceMappingURL=SearchMeal.css.map */

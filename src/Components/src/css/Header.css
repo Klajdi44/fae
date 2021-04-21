@@ -1,0 +1,38 @@
+.header-wrapper {
+  margin-bottom: 3em;
+  /* animation: show 1.4s ease-in-out; */
+}
+
+.header-wrapper h1 {
+  color: var(--secondary-h-color);
+  margin: 0;
+  padding: 3em 0.3em;
+}
+
+.header-wrapper svg {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 375px) {
+  .input-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .input-wrapper input {
+    width: 240px;
+  }
+}
+
+@media screen and (min-width: 765px) {
+  .header-wrapper svg {
+    max-width: 50%;
+  }
+}
+/*# sourceMappingURL=Header.css.map */
