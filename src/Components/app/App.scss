@@ -6,14 +6,27 @@
   font-family: Arial, Helvetica, sans-serif;
   max-width: 1200px;
   margin: auto;
+  background: var(--main-bg-color);
+  transition: all 0.3s ease;
 }
 
 // variables
 :root {
   --header-color: #525067;
   --secondary-h-color: rgb(214, 170, 57);
+  --main-bg-color: #fff;
+  --outside-card-color: #fff;
+  --selected-color: #525067;
+  --category-color: rgba(211, 211, 211, 0.259);
 }
 
+.dark {
+  --main-bg-color: #212121;
+  --header-color: #9a97b6;
+  --outside-card-color: #2c2c2c;
+  --selected-color: #383646;
+  --category-color: #2c2c2c;
+}
 .App-header {
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
@@ -25,5 +38,39 @@
 }
 
 .card-home-wrapper:last-of-type {
-  margin-bottom: 8em;
+  padding-bottom: 5em;
+}
+
+// darkmode
+
+.darkMode-wrapper {
+  background: #212121c4;
+  height: 25px;
+  width: 70px;
+  border-radius: 20px;
+  padding: 0.4em 0.43em;
+  cursor: pointer;
+
+  .darkCircle {
+    height: 25px;
+    width: 30px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+
+  .dark-on {
+    transform: translateX(40px);
+    background: url('../../assets/moon.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .dark-off {
+    transform: translateX(0px);
+    background: url('../../assets/sun.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }

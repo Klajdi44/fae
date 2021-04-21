@@ -32,7 +32,7 @@
       justify-content: center;
       align-items: center;
       scroll-snap-align: center;
-      background: rgba(211, 211, 211, 0.259);
+      background: var(--category-color);
       animation: appear 1s ease-in-out;
 
       .category-Img {
@@ -40,11 +40,14 @@
       }
 
       h3 {
-        color: #525067;
+        color: var(--header-color);
       }
     }
     .selected {
       background: #d6a939;
+      h3 {
+        color: var(--selected-color);
+      }
     }
   }
 }

@@ -18,10 +18,11 @@ function App(): JSX.Element {
      https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
   const [inputValue, setInputValue] = useState<string>('');
   const [page, setPage] = useState(1);
+  const [darkOn, setDarkOn] = useState(false);
 
   return (
     <Router>
-      <div className='App'>
+      <div className={darkOn ? 'dark App' : 'App'}>
         <header className='App-header'>
           <Switch>
             <Route exact path='/'>
@@ -63,7 +64,12 @@ function App(): JSX.Element {
               <Favorites />
             </Route>
           </Switch>
-          <BottomMenu page={page} setPage={setPage} />
+          <BottomMenu
+            page={page}
+            setPage={setPage}
+            darkOn={darkOn}
+            setDarkOn={setDarkOn}
+          />
         </header>
       </div>
     </Router>

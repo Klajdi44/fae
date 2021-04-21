@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 type Props = {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  darkOn: boolean;
+  setDarkOn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function BottomMenu(props: Props) {
-  const { page, setPage } = props;
+  const { page, setPage, setDarkOn, darkOn } = props;
   return (
     <div className='bottom-menu'>
       <Link to='/'>
@@ -31,6 +33,15 @@ function BottomMenu(props: Props) {
           <small>Favorites</small>
         </div>
       </Link>
+
+      <div
+        className='darkMode-wrapper'
+        onClick={() => setDarkOn(prevState => !prevState)}
+      >
+        <div
+          className={darkOn ? 'dark-on darkCircle' : 'dark-off darkCircle'}
+        ></div>
+      </div>
     </div>
   );
 }
