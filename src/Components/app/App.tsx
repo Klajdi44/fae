@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import fetchData from '../../modules/fetchData';
 import Card, { Meals } from '../card/Card';
@@ -18,11 +18,25 @@ function App(): JSX.Element {
      https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
   const [inputValue, setInputValue] = useState<string>('');
   const [page, setPage] = useState(1);
-  const [darkOn, setDarkOn] = useState(false);
+  const [darkOn, setDarkOn] = useState(() => false);
+  const isDarkModeOn = localStorage.getItem('darkMode');
+
+  useEffect(() => {
+    if (isDarkModeOn === 'true') {
+      setDarkOn(true);
+    }
+  }, []);
+
+  function handleDarkMode() {
+    setDarkOn(prevMode => !prevMode);
+    localStorage.setItem('darkMode', JSON.stringify(!darkOn));
+    console.log(darkOn, 'inside function');
+    console.log(isDarkModeOn);
+  }
 
   return (
     <Router>
-      <div className={darkOn ? 'dark App' : 'App'}>
+      <div className={isDarkModeOn === 'true' ? 'dark App' : 'App'}>
         <header className='App-header'>
           <Switch>
             <Route exact path='/'>
@@ -69,6 +83,8 @@ function App(): JSX.Element {
             setPage={setPage}
             darkOn={darkOn}
             setDarkOn={setDarkOn}
+            handleDarkMode={handleDarkMode}
+            isDarkModeOn={isDarkModeOn}
           />
         </header>
       </div>

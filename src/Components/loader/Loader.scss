@@ -6,7 +6,8 @@
   z-index: 999;
   flex-direction: column;
   min-height: 100vh;
-  background: #fff;
+  background: var(--main-bg-color);
+  color: var(--header-color);
   top: 0;
   bottom: 0;
   right: 0;

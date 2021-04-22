@@ -6,9 +6,18 @@ type Props = {
   setPage: React.Dispatch<React.SetStateAction<number>>;
   darkOn: boolean;
   setDarkOn: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDarkMode: () => void;
+  isDarkModeOn: string | null;
 };
 function BottomMenu(props: Props) {
-  const { page, setPage, setDarkOn, darkOn } = props;
+  const {
+    page,
+    setPage,
+    setDarkOn,
+    darkOn,
+    handleDarkMode,
+    isDarkModeOn,
+  } = props;
   return (
     <div className='bottom-menu'>
       <Link to='/'>
@@ -34,12 +43,13 @@ function BottomMenu(props: Props) {
         </div>
       </Link>
 
-      <div
-        className='darkMode-wrapper'
-        onClick={() => setDarkOn(prevState => !prevState)}
-      >
+      <div className='darkMode-wrapper' onClick={handleDarkMode}>
         <div
-          className={darkOn ? 'dark-on darkCircle' : 'dark-off darkCircle'}
+          className={
+            isDarkModeOn === 'true'
+              ? 'dark-on darkCircle'
+              : 'dark-off darkCircle'
+          }
         ></div>
       </div>
     </div>
